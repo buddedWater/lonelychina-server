@@ -7,11 +7,17 @@ photos.createIndex({'modifyTime': -1})
 photos.createIndex({'modifyTime': 1})
 
 router.get('/api1/photo', async (ctx) => {
-  let { pageSize, current, orderBy, order } = ctx.request.query
+  let { pageSize, current, orderBy, order, project } = ctx.request.query
   if(!orderBy){orderBy="modifyTime"; order=-1}
-  let total = await photos.count()
-  let st = await photos.find({},{sort: {[orderBy]: parseInt(order)}, skip: (current - 1)*pageSize, limit: parseInt(pageSize) })
-  ctx.body = { code: 1, list: st, total };
+  if(project){
+    let total = await photos.count({project})
+    let st = await photos.find({project},{sort: {[orderBy]: parseInt(order)}, skip: (current - 1)*pageSize, limit: parseInt(pageSize) })
+    ctx.body = { code: 1, list: st, total };
+  }else{
+    let total = await photos.count()
+    let st = await photos.find({},{sort: {[orderBy]: parseInt(order)}, skip: (current - 1)*pageSize, limit: parseInt(pageSize) })
+    ctx.body = { code: 1, list: st, total };
+  } 
 })
 
 router.post('/api2/photo', async (ctx) => {
