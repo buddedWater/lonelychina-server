@@ -5,7 +5,7 @@ projects.createIndex({'createTime': -1})
 projects.createIndex({'createTime': 1})
 projects.createIndex({'modifyTime': -1})
 projects.createIndex({'modifyTime': 1})
-
+projects.createIndex({'priority': 1})
 
 router.get('/api1/project', async (ctx) => {
   let { pageSize, current, orderBy, order } = ctx.request.query

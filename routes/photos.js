@@ -5,6 +5,7 @@ photos.createIndex({'createTime': -1})
 photos.createIndex({'createTime': 1})
 photos.createIndex({'modifyTime': -1})
 photos.createIndex({'modifyTime': 1})
+photos.createIndex({'priority': 1})
 
 router.get('/api1/photo', async (ctx) => {
   let { pageSize, current, orderBy, order, project } = ctx.request.query
